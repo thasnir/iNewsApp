@@ -18,6 +18,7 @@ class NewsResponseMapper(val context: Context):
       newsItemResult.shortDescription=it.description
       newsItemResult.longDescription=it.longDescription
       newsItemResult.imageUrl=it.imageUrl
+      newsItemResult.time=it.time
       newsListResult.newsList?.add(newsItemResult)
     }
 

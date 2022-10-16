@@ -21,6 +21,9 @@ class NewsItemResponse{
     @SerializedName("url")
     var url = ""
 
+    @SerializedName("publishedAt")
+    var time =""
+
     @SerializedName("urlToImage")
     var imageUrl =""
 }

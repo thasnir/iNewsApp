@@ -10,6 +10,7 @@ class NewsItemResult  {
     var id: Int?=0
     var title : String?=null
     var imageUrl : String ?=null
+    var time :String? =null
     var shortDescription : String?=null
     var longDescription : String?=null
 }

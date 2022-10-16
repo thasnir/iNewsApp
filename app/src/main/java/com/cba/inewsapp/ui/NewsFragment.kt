@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.cba.core_ui.BaseFragment
 import com.cba.inewsapp.databinding.FragmentNewsBinding
 
 
-class NewsFragment : Fragment() {
+class NewsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
@@ -26,12 +27,12 @@ class NewsFragment : Fragment() {
        binding=FragmentNewsBinding.inflate(inflater,container,false)
         binding.viewModel=newsViewModel
        // val pullToRefresh: SwipeRefreshLayout = findViewById(R.id.pullToRefresh)
-        newsViewModel.getNewsList()
+        //newsViewModel.getNewsList()
        binding. pullToRefresh.setOnRefreshListener {
-            refreshData() // your code
+            refreshData()
            binding.pullToRefresh.isRefreshing = false
         }
-        init()
+        observeNewsList()
 
         return binding.root
     }
@@ -39,19 +40,9 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-    private fun init(){
 
-        setListView()
-      //  binding.viewModel = newsViewModel
-       // setListView()
-     /*   val newsAdapter = NewsOldAdapter(newsViewModel.newsList)
-
-        binding.lvNews.adapter = newsAdapter
-        binding.lvNews.layoutManager = LinearLayoutManager(context)
-        binding.lvNews.setHasFixedSize(true)*/
-    }
     private fun setListView(){
-     newsFeedAdapter = NewsFeedAdapter(newsViewModel.newsList)
+     newsFeedAdapter = NewsFeedAdapter()
         binding.lvNews.adapter= newsFeedAdapter
         newsFeedAdapter?.onNewsItemClick = {_,_ ->
 
@@ -60,5 +51,13 @@ class NewsFragment : Fragment() {
     }
     private  fun refreshData(){
         newsFeedAdapter?.updateItems(newsViewModel.newsList)
+    }
+    private  fun observeNewsList() {
+        observe(newsViewModel.getNewsList()) {
+            if (it.success) {
+                setListView()
+            }
+
+        }
     }
 }

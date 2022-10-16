@@ -1,33 +1,31 @@
 package com.cba.inewsapp.ui
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.cba.core_ui.BaseRecyclerViewAdapter
 import com.cba.inewsapp.domain.NewsItemResult
 import com.cba.inewsapp.databinding.ItemNewsBinding
 
 class NewsFeedAdapter(
-    initialList : List<NewsItemResult>,
-    private val onClickListener : (NewsItemResult) -> Unit
-) :RecyclerView.Adapter<RecyclerView.ViewHolder>()
-{
-    init {
+    val newsList : MutableList<NewsItemResult> = ArrayList()
+) :BaseRecyclerViewAdapter<ItemNewsBinding,NewsItemResult>() {
 
-    }
-    inner class NewsFeedVh(private val binding: ItemNewsBinding):
-                      RecyclerView.ViewHolder(binding.root){
-           fun binding(item : NewsItemResult)  {
-              // binding.model = item
-           }
-  }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
-    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+    var onNewsItemClick: ((NewsItemResult, Int) -> Unit)? = null
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+    override fun getView(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): ItemNewsBinding = ItemNewsBinding.inflate(inflater, parent, false)
+
+    override fun bind(binding: ItemNewsBinding, item: NewsItemResult, position: Int) {
+        binding.model = item
+        binding.root.setOnClickListener {
+
+                onNewsItemClick?.invoke(item, position)
+
+        }
     }
 }

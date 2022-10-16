@@ -12,6 +12,11 @@ import dagger.hilt.components.SingletonComponent
 class ServiceModule {
 
    @Provides
+   fun provideApiBuilder() :ApiBuilder{
+      return ApiBuilder.getInstance("https://newsapi.org/v2",null,null)
+   }
+
+   @Provides
    fun provideNewsService(apiBuilder:ApiBuilder):NewsService{
       return apiBuilder.getService(NewsService::class.java)
    }

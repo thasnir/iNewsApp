@@ -1,4 +1,4 @@
-package com.cba.inews.service
+package com.cba.inewsapp.service
 
 import com.google.gson.annotations.SerializedName
 

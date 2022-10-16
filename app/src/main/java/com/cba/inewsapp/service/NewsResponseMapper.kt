@@ -2,7 +2,6 @@ package com.cba.inewsapp.service
 
 import android.content.Context
 import com.cba.core_domain.Mapper
-import com.cba.inews.service.NewsListResponse
 import com.cba.inewsapp.domain.NewsItemResult
 import com.cba.inewsapp.domain.NewsListResult
 

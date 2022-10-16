@@ -15,6 +15,7 @@ class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
+    private  var newsFeedAdapter:NewsFeedAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,15 @@ class NewsFragment : Fragment() {
     private fun init(){
        // newsViewModel.getNewsList()
       //  binding.viewModel = newsViewModel
-        //setListView()
+        setListView()
+    }
+    private fun setListView(){
+   newsFeedAdapter = NewsFeedAdapter()
+        binding.lvNews.adapter= newsFeedAdapter
+        newsFeedAdapter?.updateItems(newsViewModel.newsList)
+        newsFeedAdapter?.onNewsItemClick = {_,_ ->
+
+        }
     }
     private  fun observeNewsList(){
 

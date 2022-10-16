@@ -1,4 +1,4 @@
-package com.cba.inews.utils
+package com.cba.inewsapp.utils
 
 import android.widget.ImageView
 import android.widget.TextView

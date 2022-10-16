@@ -13,7 +13,7 @@ class ServiceModule {
 
    @Provides
    fun provideApiBuilder() :ApiBuilder{
-      return ApiBuilder.getInstance("https://newsapi.org/v2",null,null)
+      return ApiBuilder.getInstance("https://newsapi.org/v2/",null,null)
    }
 
    @Provides

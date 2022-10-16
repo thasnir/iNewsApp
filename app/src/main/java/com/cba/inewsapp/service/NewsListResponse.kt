@@ -3,12 +3,11 @@ package com.cba.inewsapp.service
 import com.google.gson.annotations.SerializedName
 
 class NewsListResponse {
-    @SerializedName("response")
+    @SerializedName("articles")
     val newsList = ArrayList<NewsItemResponse>()
 }
 class NewsItemResponse{
-    @SerializedName("id")
-    var id =0
+
 
     @SerializedName("title")
     var title =""
@@ -16,9 +15,12 @@ class NewsItemResponse{
     @SerializedName("description")
     var description =""
 
-    @SerializedName("longDescription")
+    @SerializedName("content")
     var longDescription = ""
 
-    @SerializedName("imageUrl")
+    @SerializedName("url")
+    var url = ""
+
+    @SerializedName("urlToImage")
     var imageUrl =""
 }

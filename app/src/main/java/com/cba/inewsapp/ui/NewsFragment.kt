@@ -1,14 +1,16 @@
 package com.cba.inewsapp.ui
 
+import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cba.inewsapp.databinding.FragmentNewsBinding
-import com.cba.inewsapp.ui.NewsViewModel
 
 
 class NewsFragment : Fragment() {
@@ -16,12 +18,19 @@ class NewsFragment : Fragment() {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
     private  var newsFeedAdapter:NewsFeedAdapter? = null
-
+    //val pullToRefresh: SwipeRefreshLayout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        binding=FragmentNewsBinding.inflate(inflater,container,false)
+        binding.viewModel=newsViewModel
+       // val pullToRefresh: SwipeRefreshLayout = findViewById(R.id.pullToRefresh)
+        newsViewModel.getNewsList()
+       binding. pullToRefresh.setOnRefreshListener {
+            refreshData() // your code
+           binding.pullToRefresh.isRefreshing = false
+        }
         return binding.root
     }
 
@@ -30,19 +39,26 @@ class NewsFragment : Fragment() {
         init()
     }
     private fun init(){
-       // newsViewModel.getNewsList()
-      //  binding.viewModel = newsViewModel
+
         setListView()
+      //  binding.viewModel = newsViewModel
+       // setListView()
+     /*   val newsAdapter = NewsOldAdapter(newsViewModel.newsList)
+
+        binding.lvNews.adapter = newsAdapter
+        binding.lvNews.layoutManager = LinearLayoutManager(context)
+        binding.lvNews.setHasFixedSize(true)*/
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun setListView(){
-   newsFeedAdapter = NewsFeedAdapter()
+     newsFeedAdapter = NewsFeedAdapter()
         binding.lvNews.adapter= newsFeedAdapter
-        newsFeedAdapter?.updateItems(newsViewModel.newsList)
         newsFeedAdapter?.onNewsItemClick = {_,_ ->
 
         }
+        refreshData()
     }
-    private  fun observeNewsList(){
-
+    private  fun refreshData(){
+        newsFeedAdapter?.updateItems(newsViewModel.newsList)
     }
 }

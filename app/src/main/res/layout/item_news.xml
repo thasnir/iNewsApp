@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".3" />
+        app:layout_constraintGuide_percent=".28" />
 
     <TextView
         android:id="@+id/newsTime"
@@ -39,8 +39,10 @@
         android:layout_margin="10dp"
         android:text="@{model.title}"
         android:textColor="#000"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="Header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
@@ -53,10 +55,10 @@
         android:layout_marginTop="10dp"
         android:textColor="#000"
         android:lines="2"
+        android:ellipsize="end"
         android:text="@{model.shortDescription}"
         android:textSize="14sp"
-        android:textStyle="bold"
-        tools:text="Header"
+        tools:text="Desc"
 
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintEnd_toEndOf="parent"

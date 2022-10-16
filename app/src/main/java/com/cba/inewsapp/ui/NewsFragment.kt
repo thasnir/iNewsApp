@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cba.core_ui.BaseFragment
@@ -26,9 +27,9 @@ class NewsFragment : BaseFragment() {
     ): View? {
        binding=FragmentNewsBinding.inflate(inflater,container,false)
         binding.viewModel=newsViewModel
-       // val pullToRefresh: SwipeRefreshLayout = findViewById(R.id.pullToRefresh)
-        //newsViewModel.getNewsList()
-       binding. pullToRefresh.setOnRefreshListener {
+
+        binding.lvNews.layoutManager=LinearLayoutManager(context)
+        binding. pullToRefresh.setOnRefreshListener {
             refreshData()
            binding.pullToRefresh.isRefreshing = false
         }
@@ -44,8 +45,10 @@ class NewsFragment : BaseFragment() {
     private fun setListView(){
      newsFeedAdapter = NewsFeedAdapter()
         binding.lvNews.adapter= newsFeedAdapter
-        newsFeedAdapter?.onNewsItemClick = {_,_ ->
-
+        binding.lvNews.layoutManager=LinearLayoutManager(context)
+        newsFeedAdapter?.onNewsItemClick = {_,pos ->
+            newsViewModel.selectedItem(pos)
+            findNavController().navigate(NewsFragmentDirections.toDetailItem())
         }
         refreshData()
     }

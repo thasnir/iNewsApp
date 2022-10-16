@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.cba.inewsapp.ui.NewsFragment"
-        android:label="NewsFragment" />
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/to_detailItem"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.cba.inewsapp.ui.NewsDetailFragment"
+        android:label="NewsDetailFragment" />
 </navigation>

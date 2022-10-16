@@ -22,6 +22,7 @@ class NewsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var newsList =ArrayList<NewsItemResult>()
+    var item=NewsItemResult()
 
     @SuppressLint("SuspiciousIndentation")
     @JvmName("getNewsList1")
@@ -29,7 +30,7 @@ class NewsViewModel @Inject constructor(
         val liveData =MutableLiveData<NewsListResult>()
         launch(defaultDispatcher){
             newsList.clear()
-        val list= newsInteractor.getLatestNews()
+          val list=  newsInteractor.getLatestNews()
             list.newsList?.let{
                 newsList.addAll(it)
             }
@@ -38,4 +39,7 @@ class NewsViewModel @Inject constructor(
         return liveData
     }
 
+    fun selectedItem(pos: Int) {
+      item =newsList.get(pos)
+    }
 }

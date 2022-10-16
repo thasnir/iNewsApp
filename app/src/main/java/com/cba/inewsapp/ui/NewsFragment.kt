@@ -31,12 +31,13 @@ class NewsFragment : Fragment() {
             refreshData() // your code
            binding.pullToRefresh.isRefreshing = false
         }
+        init()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
     }
     private fun init(){
 
@@ -49,9 +50,8 @@ class NewsFragment : Fragment() {
         binding.lvNews.layoutManager = LinearLayoutManager(context)
         binding.lvNews.setHasFixedSize(true)*/
     }
-    @SuppressLint("SuspiciousIndentation")
     private fun setListView(){
-     newsFeedAdapter = NewsFeedAdapter()
+     newsFeedAdapter = NewsFeedAdapter(newsViewModel.newsList)
         binding.lvNews.adapter= newsFeedAdapter
         newsFeedAdapter?.onNewsItemClick = {_,_ ->
 

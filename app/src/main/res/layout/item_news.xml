@@ -17,7 +17,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".4" />
+        app:layout_constraintGuide_percent=".3" />
 
     <TextView
         android:id="@+id/newsTime"
@@ -39,7 +39,8 @@
         android:layout_margin="10dp"
         android:text="@{model.title}"
         android:textColor="#000"
-        android:textSize="14sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         tools:text="Header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
@@ -49,11 +50,14 @@
         android:id="@+id/newHeading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:textColor="#000"
+        android:lines="2"
         android:text="@{model.shortDescription}"
-        android:textSize="30sp"
+        android:textSize="14sp"
         android:textStyle="bold"
+        tools:text="Header"
+
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/newsTime"

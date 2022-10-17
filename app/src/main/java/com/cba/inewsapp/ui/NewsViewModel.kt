@@ -23,6 +23,7 @@ class NewsViewModel @Inject constructor(
 
     var newsList =ArrayList<NewsItemResult>()
     var item=NewsItemResult()
+    var listCount = MutableLiveData<Int>(0)
 
     @SuppressLint("SuspiciousIndentation")
     @JvmName("getNewsList1")

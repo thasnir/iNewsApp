@@ -58,6 +58,7 @@ class NewsFragment : BaseFragment() {
     private  fun observeNewsList() {
         observe(newsViewModel.getNewsList()) {
             if (it.success) {
+                newsViewModel.listCount.postValue(1)
                 setListView()
             }
 

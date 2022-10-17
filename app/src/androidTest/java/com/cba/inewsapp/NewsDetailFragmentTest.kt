@@ -1,9 +1,12 @@
 package com.cba.inewsapp
 
 import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
@@ -16,6 +19,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.Thread.sleep
 
 @HiltAndroidTest
 @ExperimentalCoroutinesApi
@@ -30,20 +34,22 @@ class NewsDetailFragmentTest {
         hiltRule.inject()
         launchFragment<MainActivity>(
             com.cba.inewsapp.R.navigation.navigation_graph,
-            R.id.newsDetailFragment
+            R.id.newsFragment
         )
     }
 
     @Test
-    fun newsDetailsTest(){
-        val scrollView= Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.scrollView),
-                ViewMatchers.withParent(ViewMatchers.withParent(IsInstanceOf.instanceOf(NestedScrollView::class.java))),
-                ViewMatchers.isDisplayed()
+    fun newsFeedClickTest() {
+        sleep(1000)
+        val rvNews = Espresso.onView(ViewMatchers.withId(R.id.lvNews)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
             )
         )
-        scrollView.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        sleep(2000)
+
+
        val image = Espresso.onView(
             Matchers.allOf(
                 ViewMatchers.withId(R.id.appCompatImageView),
@@ -75,6 +81,25 @@ class NewsDetailFragmentTest {
             )
         )
         time.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        val fav = Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.action_fav),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        fav.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        fav.perform(click())
+        sleep(1000)
+        val share = Espresso.onView(
+            Matchers.allOf(
+                ViewMatchers.withId(R.id.action_share),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        share.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        share.perform(click())
+        sleep(1000)
 
 
     }

@@ -2,24 +2,47 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toold="http://schemas.android.com/tools">
+
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.cba.inewsapp.ui.NewsViewModel" />
     </data>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/pullToRefresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvNews"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        toold:itemCount="2"
-        toold:listitem="@layout/item_news">
+        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lvNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                toold:itemCount="2"
+                toold:listitem="@layout/item_news">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:textColor="@color/red_500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="@{viewModel.newsList.size()==0?View.VISIBLE : View.INVISIBLE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/no_data" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

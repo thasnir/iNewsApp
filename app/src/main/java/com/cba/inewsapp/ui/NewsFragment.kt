@@ -1,16 +1,13 @@
 package com.cba.inewsapp.ui
 
-import android.R
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.annotation.Nullable
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cba.core_ui.BaseFragment
 import com.cba.inewsapp.databinding.FragmentNewsBinding
 
@@ -20,7 +17,8 @@ class NewsFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
     private  var newsFeedAdapter:NewsFeedAdapter? = null
-    //val pullToRefresh: SwipeRefreshLayout
+    //val pullToRefresh:
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +32,7 @@ class NewsFragment : BaseFragment() {
            binding.pullToRefresh.isRefreshing = false
         }
         observeNewsList()
-
+        setHasOptionsMenu(false);
         return binding.root
     }
 

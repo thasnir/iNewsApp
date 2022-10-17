@@ -12,9 +12,7 @@ class NewsResponseMapper(val context: Context):
     val newsListResult = NewsListResult()
     request?.newsList?.forEach{
       val newsItemResult = NewsItemResult()
-
       newsItemResult.title=it.title
-
       newsItemResult.shortDescription=it.description
       newsItemResult.longDescription=it.longDescription
       newsItemResult.imageUrl=it.imageUrl

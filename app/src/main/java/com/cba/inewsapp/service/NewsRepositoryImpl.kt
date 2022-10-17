@@ -18,14 +18,10 @@ class NewsRepositoryImpl @Inject constructor(
         var newsResult = NewsListResult()
         try{
             val data = newsService.getNews()
-           // Log.w("##3","api data###  = ${data?.newsList?.size}")
             newsResult= NewsResponseMapper(context).convert(data)
-            Log.w("##$$$$$$$$$$","api data###  = ${newsResult.newsList?.size}")
             newsResult.success=true
         }catch (throwable : Throwable){
-           // newsResult.p
         }
-
         return newsResult
     }
 }

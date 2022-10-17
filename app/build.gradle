@@ -49,6 +49,10 @@ dependencies {
 
     implementation project(path: ':core-domain')
     implementation project(path: ':core-ui')
+//toolbar
+    implementation "androidx.appcompat:appcompat:1.5.1"
+
+    implementation "com.google.android.material:material:1.6.1"
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.2"
